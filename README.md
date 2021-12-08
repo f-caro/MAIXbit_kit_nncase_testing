@@ -12,4 +12,8 @@ Also in linux, it is recommended to use the binary uploader provided by MaixPy: 
 The `maixpy_v0.6.2_72_g22a8555b5_with_lvgl.bin` binary by itself will ask for the kmodel file.  That needs to uploaded via kflash : `kflash -p /dev/ttyUSB0 -B maixduino -b 1500000 face_model_at_0x300000.kfpkg`.  Sources [issue explanation](https://github.com/sipeed/MaixPy/issues/361) ;  
 Full instructions on howto upload binary and kmodel file / thanks to GarretGross :: (https://garrettgoss.com/blog/2019/07/getting-started-with-the-sipeed-maixduino-kit.html)
 
+Thonny has a hard time uploading files correctly (error halfway through upload, causes file truncated at awkward file position).  So use ampy instead :  `pip3 install adafruit-ampy --user`  ---> `ampy --port /dev/ttyUSB0 -d 0.5 put face_model_detect_test1.py /flash/face_model_detect_test1.py`
 
+- Face has to be properly lit in order for KPU to detect face.
+
+`demo_scan_qr_code.py`  is a great example of scanning QR code,  ` img = sensor.snapshot()`  then  `res = img.find_qrcodes()`  ---  but the digital camera has no mechanical auto focus, so one has to preset the focal distance to detect printed QR code.  Also room illumination plays a key role in detection.  Should try the RaspberryPi InfraRed camera to see if detects at low lighting scenarios. 
